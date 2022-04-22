@@ -1,0 +1,33 @@
+{
+  "version": "0.2",
+  "enabled": true,
+  "language": "en",
+  "allowCompoundWords": true,
+  "dictionaries": ["typescript", "aws", "node", "npm", "html"],
+  "enabledLanguageIds": [
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "markdown",
+    "yaml",
+    "json"
+  ],
+  "words": [
+    "bbbec",
+    "binded",
+    "CEST",
+    "ESBUILD",
+    "fbfc",
+    "ihswe",
+    "keccak",
+    "merkle",
+    "mockWLD",
+    "Mesha",
+    "Nullifer",
+    "txreceipt",
+    "walletconnect",
+    "worldid",
+    "ZKPs",
+    "zkey"
+  ]
+}
