@@ -12,7 +12,7 @@ The Javascript integration is the simplest way to integrate [World ID](https://i
 
 ## 🚀 Quick start
 
-You can test this dApp right away with our deployed smart contract in the [Polygon Mumbai Testnet](https://mumbai.polygonscan.com) (address `0xA534db850DA9F55C07ea3c897372AFf7473DB859`). This deployed contract uses the [World ID Test Network](https://id.worldcoin.org/test) for verified identities.
+You can test this dApp right away with our deployed smart contract in the [Polygon Mumbai Testnet](https://mumbai.polygonscan.com) (address `0x330C8452C879506f313D1565702560435b0fee4C`). This deployed contract uses the [World ID Test Network](https://id.worldcoin.org/test) for verified identities.
 
 1. Install dependencies.
 
