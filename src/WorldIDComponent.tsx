@@ -1,8 +1,16 @@
 import { defaultAbiCoder as abi } from "@ethersproject/abi";
+import { keccak256 } from "@ethersproject/solidity";
 import type { VerificationResponse } from "@worldcoin/id";
 import worldID from "@worldcoin/id";
 import React from "react";
 import { CONTRACT_ADDRESS } from "./const";
+
+const hashBytes = (input: string): string => {
+  return abi.encode(
+    ["uint256"],
+    [BigInt(keccak256(["bytes"], [input])) >> BigInt(8)],
+  );
+};
 
 export const WorldIDComponent = ({
   signal,
@@ -24,8 +32,8 @@ export const WorldIDComponent = ({
   React.useEffect(() => {
     if (!worldID.isInitialized()) {
       worldID.init("world-id-container", {
-        actionId: CONTRACT_ADDRESS,
-        signal: abi.encode(["address"], [signal]),
+        actionId: hashBytes(CONTRACT_ADDRESS),
+        signal,
       });
     }
     if (!worldID.isEnabled()) {
