@@ -32,7 +32,7 @@ export const WorldIDComponent = ({
   React.useEffect(() => {
     if (!worldID.isInitialized()) {
       worldID.init("world-id-container", {
-        actionId: hashBytes(CONTRACT_ADDRESS),
+        action_id: hashBytes(CONTRACT_ADDRESS),
         signal,
       });
     }
