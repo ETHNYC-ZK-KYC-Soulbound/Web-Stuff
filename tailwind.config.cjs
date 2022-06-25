@@ -64,6 +64,7 @@ module.exports = {
         "#18161b",
         "#d4bfff",
         "#df57bc",
+        "#f1b261",
         "#ffffff",
       ]),
 
