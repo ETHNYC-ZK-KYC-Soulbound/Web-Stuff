@@ -111,7 +111,7 @@ export const App = React.memo(function App() {
             className="text-20 font-bold text-ffffff xs:text-32"
             style={{ flexGrow: 1 }}
           >
-            Mesha
+            zk kyc sbt
           </p>
           {walletAddress && (
             <div className="font-bold text-ffffff">
@@ -132,12 +132,12 @@ export const App = React.memo(function App() {
         {screen !== Screen.Congratulations && (
           <div className="grid justify-items-center gap-y-3 justify-self-center text-ffffff xs:gap-y-4">
             <h1 className="text-16 font-bold xs:text-24">
-              BIGGEST AIRDROP IS HERE!
+              prove you're a human with worldcoin
             </h1>
 
-            <div className="mt-2 grid justify-items-center text-48 lg:text-80 xs:mt-0 xs:block">
-              <span className="font-black text-df57bc ">Get $50 </span>
-              <span className="font-black">in Mesha</span>
+            <div className="lg:text-50 mt-2 grid justify-items-center text-30 xs:mt-0 xs:block">
+              <span className="font-black text-df57bc ">complete KYC </span>
+              <span className="font-black">secured by zkProofs</span>
             </div>
 
             <p className="mb-5 text-center text-14 xs:mb-8 xs:text-18">
@@ -152,7 +152,7 @@ export const App = React.memo(function App() {
                   type="button"
                   className="bg-df57bc hover:bg-df57bc/70"
                 >
-                  Connect Wallet to Claim
+                  Connect Wallet
                 </Button>
 
                 <p className="text-14 xs:text-12">
@@ -176,7 +176,7 @@ export const App = React.memo(function App() {
                   disabled={!worldIDProof}
                   onClick={claim}
                 >
-                  Claim
+                  Complete KYC
                 </Button>
               </div>
             )}
@@ -194,7 +194,7 @@ export const App = React.memo(function App() {
               CONGRATULATIONS!
             </h1>
             <p className="text-center text-14 text-ffffff xs:text-18">
-              Your tokens have been claimed and they are now available in your
+              Your soulbound token has been minted and is available in your
               wallet!
             </p>
             <p className="text-center text-14 text-ffffff xs:text-18">
@@ -227,9 +227,6 @@ export const App = React.memo(function App() {
             "border-t border-df57bc bg-0f0b16 py-3 text-df57bc xs:rounded-10 xs:border xs:text-center",
           )}
         >
-          <span>
-            Mesha is a mock client app to showcase how World ID works.{" "}
-          </span>
           <a
             href="/"
             className="underline decoration-1 transition-opacity hover:opacity-80"
