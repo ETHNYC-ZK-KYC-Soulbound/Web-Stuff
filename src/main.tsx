@@ -1,3 +1,4 @@
+import { ChakraProvider } from "@chakra-ui/react";
 import React from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -12,26 +13,27 @@ if (!container) throw new ReferenceError(`Unable to found root element`);
 const root = ReactDOMClient.createRoot(container);
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="*"
-          element={<div>not found</div>}
-        />
-        <Route
-          path="/"
-          element={<App />}
-        ></Route>
-        <Route
-          path="/prove"
-          element={<Prove />}
-        ></Route>
-        <Route
-          path="/verify"
-          element={<Verify />}
-        ></Route>
-      </Routes>
-    </BrowserRouter>
+    <ChakraProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="*"
+            element={<div>not found</div>}
+          />
+          <Route
+            path="/"
+            element={<App />}
+          ></Route>
+          <Route
+            path="/prove"
+            element={<Prove />}
+          ></Route>
+          <Route
+            path="/verify"
+            element={<Verify />}
+          ></Route>
+        </Routes>
+      </BrowserRouter>
+    </ChakraProvider>
   </React.StrictMode>,
 );
-//comment

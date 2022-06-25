@@ -1,5 +1,6 @@
 import backgroundMobilePng from "@static/background-mobile.png";
-import backgroundPng from "@static/background.png";
+import backgroundPng from "@static/zk 1.png";
+// import backgroundPngblack from "@static/black.png";
 import React from "react";
 
 export const Background = React.memo(function Background() {

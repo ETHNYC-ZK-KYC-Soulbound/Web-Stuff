@@ -1,15 +1,14 @@
 import { Button } from "@/common/Button/Button";
 import { useToggle } from "@/common/hooks/use-toggle";
-import { Icon } from "@/common/Icon";
 import { CONTRACT_ABI, CONTRACT_ADDRESS, provider } from "@/const";
 import { midEllipsis } from "@/utils";
 import { WorldIDComponent } from "@/WorldIDComponent";
+import { Box } from "@chakra-ui/react";
 import { defaultAbiCoder as abi } from "@ethersproject/abi";
-import successSvg from "@static/success.svg";
 import type { VerificationResponse } from "@worldcoin/id";
 import cn from "classnames";
 import { ethers } from "ethers";
-import React from "react";
+import React, { useState } from "react";
 import { Background } from "./Background/Background";
 import { Modal } from "./Modal/Modal";
 import type { ModalContent } from "./Modal/modal-variants";
@@ -27,11 +26,35 @@ export const App = React.memo(function App() {
     React.useState<VerificationResponse | null>(null);
   const [walletAddress, setWalletAddress] = React.useState("");
   const [txHash, setTxHash] = React.useState(""); // hash of the executed airdrop
+  const [image, setImage] = useState({ preview: "", raw: "" });
 
   const [modalContent, setModalContent] = React.useState<ModalContent>(
     modalVariants.confirmation,
   );
   const modal = useToggle();
+
+  const handleChange = (e) => {
+    if (e.target.files.length) {
+      setImage({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0],
+      });
+    }
+  };
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", image.raw);
+
+    await fetch("YOUR_URL", {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      body: formData,
+    });
+  };
 
   const connectWallet = React.useCallback(async () => {
     try {
@@ -136,13 +159,14 @@ export const App = React.memo(function App() {
             </h1>
 
             <div className="lg:text-50 mt-2 grid justify-items-center text-30 xs:mt-0 xs:block">
-              <span className="font-black text-df57bc ">complete KYC </span>
+              <span className="font-black">complete</span>
+              <span className="font-black text-f1b261 "> KYC </span>
               <span className="font-black">secured by zkProofs</span>
             </div>
 
             <p className="mb-5 text-center text-14 xs:mb-8 xs:text-18">
-              Mesha is live and ready to use. Login to claim your tokens for
-              free.
+              access state regulated services without losing unnecassary
+              personal data
             </p>
 
             {screen === Screen.Initial && (
@@ -150,14 +174,10 @@ export const App = React.memo(function App() {
                 <Button
                   onClick={connectWallet}
                   type="button"
-                  className="bg-df57bc hover:bg-df57bc/70"
+                  className="bg-f1b261 hover:bg-f1b261/70"
                 >
                   Connect Wallet
                 </Button>
-
-                <p className="text-14 xs:text-12">
-                  To test this flow, connect a wallet on Testnet
-                </p>
               </div>
             )}
 
@@ -170,14 +190,49 @@ export const App = React.memo(function App() {
                   />
                 )}
 
-                <Button
-                  type="button"
-                  className="w-full bg-df57bc hover:bg-df57bc/70"
-                  disabled={!worldIDProof}
-                  onClick={claim}
+                <Box
+                  display="flex"
+                  alignContent="center"
+                  justifyContent="center"
+                  borderRadius="30"
+                  h="55"
+                  className="w-full bg-f1b261 hover:bg-f1b261/70"
                 >
-                  Complete KYC
-                </Button>
+                  <label htmlFor="upload-button">
+                    {image.preview ? (
+                      <img
+                        src={image.preview}
+                        alt="dummy"
+                        width="300"
+                        height="300"
+                      />
+                    ) : (
+                      <>
+                        <span className="fa-stack fa-2x mt-3 mb-2">
+                          <i className="fas fa-circle fa-stack-2x" />
+                          <i className="fas fa-store fa-stack-1x fa-inverse" />
+                        </span>
+                        <h5 className="text-center">Add photo ID photo</h5>
+                      </>
+                    )}
+                  </label>
+                  <input
+                    type="file"
+                    id="upload-button"
+                    style={{ display: "none" }}
+                    onChange={handleChange}
+                  />
+                </Box>
+                <Box
+                  display="flex"
+                  alignContent="center"
+                  justifyContent="center"
+                  borderRadius="30"
+                  h="55"
+                  className="w-full bg-f1b261 hover:bg-f1b261/70"
+                >
+                  <button onClick={handleUpload}>Upload</button>
+                </Box>
               </div>
             )}
           </div>
@@ -185,56 +240,17 @@ export const App = React.memo(function App() {
 
         {screen === Screen.Congratulations && (
           <div className="grid max-w-[314px] justify-items-center gap-y-3 justify-self-center">
-            <Icon
+            {/* <Icon
               src={successSvg}
               className="mb-3 h-12 w-12"
               useMask={false}
-            />
+            /> */}
             <h1 className="text-24 font-bold text-ffffff xs:text-30">
               CONGRATULATIONS!
             </h1>
-            <p className="text-center text-14 text-ffffff xs:text-18">
-              Your soulbound token has been minted and is available in your
-              wallet!
-            </p>
-            <p className="text-center text-14 text-ffffff xs:text-18">
-              Your transaction hash is:{" "}
-              <code
-                title={txHash}
-                style={{ maxWidth: 100, fontFamily: "monospace" }}
-              >
-                {midEllipsis(txHash, 20)}
-              </code>{" "}
-              (view on{" "}
-              <a
-                href={`https://mumbai.polygonscan.com/tx/${txHash}`}
-                target="_blank"
-                style={{ color: "#df57bc" }}
-                rel="noreferrer"
-              >
-                Polygonscan
-              </a>
-              )
-            </p>
           </div>
         )}
       </div>
-
-      {screen === Screen.Initial && (
-        <div
-          className={cn(
-            "relative -mx-6 max-w-[1088px] justify-self-center px-6 xs:w-full",
-            "border-t border-df57bc bg-0f0b16 py-3 text-df57bc xs:rounded-10 xs:border xs:text-center",
-          )}
-        >
-          <a
-            href="/"
-            className="underline decoration-1 transition-opacity hover:opacity-80"
-          >
-            Learn more
-          </a>
-        </div>
-      )}
 
       <Modal
         status={modalContent.status}
