@@ -9,6 +9,10 @@ if (!container) throw new ReferenceError(`Unable to found root element`);
 const root = ReactDOMClient.createRoot(container);
 root.render(
   <React.StrictMode>
+    {/* <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}> */}
     <App />
+    {/* </RainbowKitProvider>
+    </WagmiConfig> */}
   </React.StrictMode>,
 );
