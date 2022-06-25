@@ -1,6 +1,4 @@
-<img src="https://raw.githubusercontent.com/worldcoin/world-id-js/main/world-id-logo.svg" alt="World ID logo" width="300" />
-
-# World ID Example - Mesha Airdrop
+# KYC-ZK-SB
 
 This repository contains an example decentralized application (dapp) for [World ID](https://id.worlcoin.org). With Mesha Airdrop test airdropping an ERC-20 token validating a single person can only claim a token once.
 
@@ -49,15 +47,3 @@ Follow these steps if you want to use your own smart contract and/or use a diffe
 1. Deploy your own smart contract using the Airdrop smart contract from [this repository][smartcontract].
 2. Set the contract address using the `WLD_CONTRACT_ADDRESS` env var (or edit `const.tsx` directly).
 3. Update the contract's ABI in `const.tsx` (if you changed the contract's `claim` function).
-
-## 📄 Documentation
-
-Full documentation for this and all World ID examples can be found at [https://id.worldcoin.org/docs/examples](https://id.worldcoin.org/docs/examples).
-
-## 🧑‍⚖️ License
-
-This repository is MIT licensed. Please review the LICENSE file in this repository.
-
-Copyright (C) 2022 Tools for Humanity Corporation.
-
-[smartcontract]: https://github.com/worldcoin/world-id-example-airdrop
