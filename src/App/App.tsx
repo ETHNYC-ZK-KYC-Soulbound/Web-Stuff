@@ -34,12 +34,6 @@ export const App = React.memo(function App() {
     raw: null,
   });
 
-  // const proverPage = () => {
-  //   return {
-  //     link='router.push("/prover");'
-  //   }
-  // });
-
   const [modalContent, setModalContent] = React.useState<ModalContent>(
     modalVariants.confirmation,
   );
