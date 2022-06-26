@@ -18,6 +18,8 @@ import React, {
   // useEffect,
   // useState 
 } from "react";
+import BindProofKyc from "artifacts/contracts/BindProofKyc.sol/BindProofKyc.json"
+import { Contract, providers, utils } from "ethers"
 // import { useSigner } from "wagmi";
 
 export default function PickGroup() {
@@ -51,6 +53,21 @@ export default function PickGroup() {
     const solidityProof = packToSolidityProof(proof)
     console.log(solidityProof)
     console.log('prove created for NY')
+
+    console.log('load contract')
+    const contract = new Contract("0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512", BindProofKyc.abi)
+
+    const contractOwner = contract.connect(signer)
+
+    try {
+      await contractOwner.greet(utils.formatBytes32String(greeting), publicSignals.nullifierHash, solidityProof)
+
+    } catch (error: any) {
+      const { message } = JSON.parse(error.body).error
+      const reason = message.substring(message.indexOf("'") + 1, message.lastIndexOf("'"))
+      console.log(reason)
+    }
+    console.log('mint proof into the contract')
   }
   const handleWy = () => {
     console.log("Validating that this user is from: " + "WY");
