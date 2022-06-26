@@ -26,7 +26,9 @@ export const grabFromIPFS = async (cid: string, pk: string) => {
   // console.log("Done");
   // return await decryptWithPrivateKey(pk, toDecode);
   const toDecode = cipher.parse(text as string);
-  return await decryptWithPrivateKey("privateKey", toDecode);
+
+  console.log("Done");
+  return await decryptWithPrivateKey(pk, toDecode);
 };
 
 export function getBase64(file: File): Promise<string> {

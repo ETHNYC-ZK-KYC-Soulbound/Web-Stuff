@@ -24,7 +24,7 @@ enum Screen {
 }
 
 export const App = React.memo(function App() {
-  const [screen, setScreen] = React.useState(Screen.Confirm);
+  const [screen, setScreen] = React.useState(Screen.Initial);
   const [worldIDProof, setWorldIDProof] =
     React.useState<VerificationResponse | null>(null);
   const [walletAddress, setWalletAddress] = React.useState("");
@@ -81,7 +81,7 @@ export const App = React.memo(function App() {
   }, [provider]);
 
   const logout = () => {
-    provider?.disconnect().catch(console.error.bind(console));
+    provider.disconnect().catch(console.error.bind(console));
     window.location.reload();
   };
 
@@ -203,7 +203,7 @@ export const App = React.memo(function App() {
         {screen !== Screen.Congratulations && (
           <div className="grid justify-items-center gap-y-3 justify-self-center text-ffffff xs:gap-y-4">
             <h1 className="text-16 font-bold xs:text-24">
-              prove you're a human with worldcoin
+              Are you a robot?
             </h1>
 
             <div className="lg:text-50 mt-2 grid justify-items-center text-30 xs:mt-0 xs:block">
@@ -213,8 +213,7 @@ export const App = React.memo(function App() {
             </div>
 
             <p className="mb-5 text-center text-14 xs:mb-8 xs:text-18">
-              access state regulated services without losing unnecassary
-              personal data
+              Access state regulated services without exposing private data.
             </p>
 
             {screen === Screen.Initial && (
@@ -248,7 +247,7 @@ export const App = React.memo(function App() {
                   borderRadius="30"
                   h="55"
                   textColor="black"
-                  className="w-full bg-f1b261 hover:bg-f1b261/70"
+                  className="w-full"
                 >
                   <label htmlFor="upload-button">
                     {image.preview ? (
@@ -259,13 +258,13 @@ export const App = React.memo(function App() {
                         height="300"
                       />
                     ) : (
-                      <>
-                        <span className="fa-stack fa-2x mt-3 mb-2">
-                          <i className="fas fa-circle fa-stack-2x" />
-                          <i className="fas fa-store fa-stack-1x fa-inverse" />
-                        </span>
-                        <h5 className="text-center">Add photo ID photo</h5>
-                      </>
+                      <div className="cursor-pointer bg-f1b261 py-4 px-2 hover:bg-f1b261/70">
+                        {/*<span className="fa-stack fa-2x mt-3 mb-2">*/}
+                        {/*  <i className="fas fa-circle fa-stack-2x" />*/}
+                        {/*  <i className="fas fa-store fa-stack-1x fa-inverse" />*/}
+                        {/*</span>*/}
+                        <div className="text-center">Add photo ID photo</div>
+                      </div>
                     )}
                   </label>
                   <input
@@ -275,17 +274,19 @@ export const App = React.memo(function App() {
                     onChange={handleChange}
                   />
                 </Box>
-                <Box
-                  display="flex"
-                  alignContent="center"
-                  justifyContent="center"
-                  borderRadius="30"
-                  h="55"
-                  textColor="black"
-                  className="w-full bg-f1b261 hover:bg-f1b261/70"
-                >
-                  <button onClick={handleUpload}>Upload</button>
-                </Box>
+                <button type="button" onClick={handleUpload}>
+                  <Box
+                    display="flex"
+                    alignContent="center"
+                    justifyContent="center"
+                    borderRadius="30"
+                    h="55"
+                    textColor="black"
+                    className="cursor-pointer bg-f1b261 py-4 px-2 hover:bg-f1b261/70"
+                  >
+                    Upload
+                  </Box>
+                </button>
               </div>
             )}
           </div>
