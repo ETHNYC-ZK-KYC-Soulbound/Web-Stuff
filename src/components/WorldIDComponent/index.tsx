@@ -1,12 +1,12 @@
-import { defaultAbiCoder as abi } from "@ethersproject/abi";
 import { keccak256 } from "@ethersproject/solidity";
+import { utils } from 'ethers'
 import type { VerificationResponse } from "@worldcoin/id";
 import worldID from "@worldcoin/id";
 import React from "react";
-import { CONTRACT_ADDRESS } from "./const";
+import { CONTRACT_ADDRESS } from "../../utils/const";
 
 const hashBytes = (input: string): string => {
-  return abi.encode(
+  return utils.defaultAbiCoder.encode(
     ["uint256"],
     [BigInt(keccak256(["bytes"], [input])) >> BigInt(8)],
   );

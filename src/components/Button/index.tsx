@@ -1,7 +1,7 @@
 import cn from "classnames";
 import React from "react";
 
-export const Button = React.memo(function Button(props: {
+const Button = React.memo(function Button(props: {
   onClick?: () => void;
   children: React.ReactNode;
   className?: string;
@@ -23,3 +23,5 @@ export const Button = React.memo(function Button(props: {
     </button>
   );
 });
+
+export default Button

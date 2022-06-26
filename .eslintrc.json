@@ -35,10 +35,7 @@
 
     // not included into recommended set rules
     "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/consistent-type-imports": [
-      "warn",
-      { "prefer": "type-imports" }
-    ],
+    "@typescript-eslint/consistent-type-imports": "off",
     "@typescript-eslint/require-await": "off",
     "sort-imports": "off", // we use TypeScripts' organize imports feature
     "@typescript-eslint/no-var-requires": "error",

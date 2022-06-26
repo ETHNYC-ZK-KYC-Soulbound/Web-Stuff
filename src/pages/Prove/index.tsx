@@ -1,5 +1,5 @@
-import { Background } from "@/App/Background/Background";
-import { grabFromIPFS } from "@/photo";
+// import Background from "@/App/Background";
+import { grabFromIPFS } from "@/utils/photo";
 import {
   Box,
   Button,
@@ -13,10 +13,12 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import React, { useEffect, useState } from "react";
 import { useSigner } from "wagmi";
 
+import Background from '@/components/Background'
+
 export default function Validate() {
   const [option, setOption] = React.useState("");
   const [image, setImage] = useState("");
-  const { data: signer, isError, isLoading } = useSigner();
+  const { data: signer } = useSigner();
   const handleSubmit = () => {
     console.log("Validating that this user is from: " + option);
   };
@@ -26,13 +28,10 @@ export default function Validate() {
       "bafybeiaeqnhkt3m2uzchv7eogbvxrwupayra5ian2tnz3plw64rc2x5zdy",
       "bafybeif6drthpjpyk4texti4flfo6k333ii3t4dtd4fcmbra5nvojvbrsa",
     ];
-
-    const grabImage = async () => {
+    void (async () => {
       const base64String = await grabFromIPFS(cids[0], "private key here");
       setImage(base64String);
-    };
-
-    grabImage();
+    })();
   }, []);
 
   console.log("signer is", signer);
@@ -70,7 +69,8 @@ export default function Validate() {
         <Container
           flexDirection="column"
           justifyContent="center"
-          align="center"
+          // align="center"
+          alignContent="center"
         >
           <Select
             placeholder="Select City"

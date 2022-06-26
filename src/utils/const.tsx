@@ -2,16 +2,16 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 
 export const provider = new WalletConnectProvider({
   rpc: {
-    80001: "https://rpc-mumbai.maticvigil.com/",
+    80001: "https://rpc.ankr.com/polygon_mumbai",
   },
-  clientMeta: {
-    name: "meshaApp",
-    description: "Biggest airdrop is here! World ID example app.",
-    url: "https://github.com/worldcoin/world-id-example-airdrop-dapp",
-    icons: [
-      document.head.querySelector<HTMLLinkElement>("link[rel~=icon]")!.href,
-    ],
-  },
+  // clientMeta: {
+  //   name: "meshaApp",
+  //   description: "Biggest airdrop is here! World ID example app.",
+  //   url: "https://github.com/worldcoin/world-id-example-airdrop-dapp",
+  //   icons: [
+  //     document.head.querySelector<HTMLLinkElement>("link[rel~=icon]")!.href,
+  //   ],
+  // },
 });
 
 export const CONTRACT_ADDRESS =

@@ -8,11 +8,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import React from "react";
+import { useState } from 'react'
 
 interface Info {
   state: string;
-  worldCoinVerified: boolean;
+  worldCoinVerified: boolean
 }
 
 const idToInfo = new Map<string, Info>([
@@ -33,7 +33,7 @@ const idToInfo = new Map<string, Info>([
 ]);
 
 export default function Validate() {
-  const [id, setId] = React.useState("");
+  const [id, setId] = useState("");
   console.log("id is", id);
   const handleSubmit = () => {
     console.log("Verifying user with id " + id);
@@ -62,7 +62,7 @@ export default function Validate() {
         <Container
           flexDirection="column"
           justifyContent="center"
-          align="center"
+          alignItems="center"
         >
           <Select
             placeholder="Select UUID"
@@ -75,7 +75,7 @@ export default function Validate() {
             size="lg"
           >
             {[...idToInfo.keys()].map((id) => (
-              <option value={id}>{id}</option>
+              <option key={id} value={id}>{id}</option>
             ))}
           </Select>
 

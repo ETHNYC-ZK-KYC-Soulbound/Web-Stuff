@@ -3,7 +3,7 @@ import backgroundPng from "@static/zk 1.png";
 // import backgroundPngblack from "@static/black.png";
 import React from "react";
 
-export const Background = React.memo(function Background() {
+const Background = React.memo(function Background() {
   return (
     <div className="pointer-events-none fixed inset-0 h-full w-full">
       <img
@@ -19,3 +19,5 @@ export const Background = React.memo(function Background() {
     </div>
   );
 });
+
+export default Background

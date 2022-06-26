@@ -1,4 +1,4 @@
-import type { ImageSource } from "@/common/types";
+import type { ImageSource } from "@/types";
 import failSvg from "@static/fail.svg";
 import spinnerSvg from "@static/spinner.svg";
 

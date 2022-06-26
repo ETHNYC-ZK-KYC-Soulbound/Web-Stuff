@@ -1,6 +1,6 @@
 import cn from "classnames";
 import React from "react";
-import type { ImageSource } from "../types";
+import type { ImageSource } from "../../types";
 import styles from "./icon.module.css";
 
 type Props = {

@@ -1,10 +1,10 @@
-import { Button } from "@/common/Button/Button";
-import { Icon } from "@/common/Icon";
-import type { ImageSource, ToggleState } from "@/common/types";
+import Button  from "@/components/Button";
+import { Icon } from "@/components/Icon";
+import type { ImageSource, ToggleState } from "@/types";
 import cn from "classnames";
 import React from "react";
 
-export const Modal = React.memo(function Modal(props: {
+const Modal = React.memo(function Modal(props: {
   status: string;
   description?: string;
   buttonText?: string;
@@ -51,3 +51,5 @@ export const Modal = React.memo(function Modal(props: {
     </div>
   );
 });
+
+export default Modal
