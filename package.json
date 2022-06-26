@@ -33,6 +33,7 @@
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "clsx": "^1.1.1",
+    "eth-crypto": "^2.3.0",
     "ethers": "^5.6.9",
     "framer-motion": "^6.3.15",
     "react": "18.1.0",
@@ -40,6 +41,7 @@
     "react-popper-tooltip": "^4.3.1",
     "react-router-dom": "^6.3.0",
     "stripe": "^9.10.0",
+    "web3.storage": "^4.3.0",
     "wagmi": "^0.4.12"
   },
   "devDependencies": {
