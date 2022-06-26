@@ -1,14 +1,17 @@
 import { Button } from "@/common/Button/Button";
 import { useToggle } from "@/common/hooks/use-toggle";
 import { CONTRACT_ABI, CONTRACT_ADDRESS, provider } from "@/const";
+import { getBase64 } from "@/photo";
 import { midEllipsis } from "@/utils";
 import { WorldIDComponent } from "@/WorldIDComponent";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Spacer, Text } from "@chakra-ui/react";
 import { defaultAbiCoder as abi } from "@ethersproject/abi";
 import type { VerificationResponse } from "@worldcoin/id";
+import axios from "axios";
 import cn from "classnames";
 import { ethers } from "ethers";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Background } from "./Background/Background";
 import { Modal } from "./Modal/Modal";
 import type { ModalContent } from "./Modal/modal-variants";
@@ -21,19 +24,28 @@ enum Screen {
 }
 
 export const App = React.memo(function App() {
-  const [screen, setScreen] = React.useState(Screen.Initial);
+  const [screen, setScreen] = React.useState(Screen.Confirm);
   const [worldIDProof, setWorldIDProof] =
     React.useState<VerificationResponse | null>(null);
   const [walletAddress, setWalletAddress] = React.useState("");
   const [txHash, setTxHash] = React.useState(""); // hash of the executed airdrop
-  const [image, setImage] = useState({ preview: "", raw: "" });
+  const [image, setImage] = useState<{ preview: string; raw: File | null }>({
+    preview: "",
+    raw: null,
+  });
+
+  // const proverPage = () => {
+  //   return {
+  //     link='router.push("/prover");'
+  //   }
+  // });
 
   const [modalContent, setModalContent] = React.useState<ModalContent>(
     modalVariants.confirmation,
   );
   const modal = useToggle();
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     if (e.target.files.length) {
       setImage({
         preview: URL.createObjectURL(e.target.files[0]),
@@ -42,18 +54,21 @@ export const App = React.memo(function App() {
     }
   };
 
-  const handleUpload = async (e) => {
+  const handleUpload = async (e: any) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", image.raw);
 
-    await fetch("YOUR_URL", {
-      method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      body: formData,
+    if (!image) {
+      throw new Error("Ahhh");
+    }
+
+    const base64String = await getBase64(image.raw!);
+
+    // TODO Set to real deployment
+    const result = await axios.post("http://localhost:3001/upload", {
+      photo: base64String,
     });
+
+    console.log(result.data);
   };
 
   const connectWallet = React.useCallback(async () => {
@@ -134,13 +149,46 @@ export const App = React.memo(function App() {
             className="text-20 font-bold text-ffffff xs:text-32"
             style={{ flexGrow: 1 }}
           >
-            <Text
-              fontSize="5xl"
-              color="white"
-              fontWeight="light"
+            <Box
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="end"
+              zIndex="1"
+              p="20px"
             >
-              ZKPKYCSBT
-            </Text>
+              <Text
+                fontSize="5xl"
+                color="white"
+                fontWeight="light"
+              >
+                ZKPKYCSBT
+              </Text>
+              <Spacer />
+              <Box>
+                <Link to="/prove">
+                  <Text
+                    fontSize="xl"
+                    color="white"
+                    fontWeight="normal"
+                    p="20px"
+                  >
+                    Prove
+                  </Text>
+                </Link>
+              </Box>
+              <Box>
+                <Link to="/verify">
+                  <Text
+                    fontSize="xl"
+                    color="white"
+                    fontWeight="normal"
+                    p="20px"
+                  >
+                    Verify
+                  </Text>
+                </Link>
+              </Box>
+            </Box>
           </p>
           {walletAddress && (
             <div className="font-bold text-ffffff">
