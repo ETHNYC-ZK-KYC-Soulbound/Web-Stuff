@@ -6,8 +6,8 @@ import { toast } from 'react-toastify'
 import cn from "classnames";
 import { Contract } from 'ethers'
 import { Web3Storage } from 'web3.storage'
-import {useAppDispatch, useAppSelector} from "@/states/hooks";
-import {selectWorldIDResponse, updateUploadedCID} from "@/states/application/slice";
+// import {useAppDispatch, useAppSelector} from "@/states/hooks";
+// import {selectWorldIDResponse, updateUploadedCID} from "@/states/application/slice";
 import {JsonRpcProvider} from "@ethersproject/providers";
 import * as WorldIDVerification from '../../abis/WorldIDVerification.json'
 // import { Semaphore } from '@zk-kit/protocols'
@@ -17,7 +17,7 @@ const storage = new Web3Storage({ token: web3StorageToken, endpoint: new URL("ht
 
 export default function Upload() {
   // const dispatch = useAppDispatch()
-  const [walletAddress, setWalletAddress] = useState<string | undefined()
+  const [walletAddress, setWalletAddress] = useState<string | undefined>()
 
   const [image, setImage] = useState<{ preview: string; raw: File | null }>({
     preview: "",
