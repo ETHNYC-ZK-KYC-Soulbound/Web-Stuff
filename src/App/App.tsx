@@ -198,8 +198,7 @@ export const App = React.memo(function App() {
               </Box>
             )}
 
-            {
-              // screen === Screen.Confirm && (
+            {screen === Screen.Confirm && (
               <div className="grid w-full max-w-[254px] gap-y-8">
                 {walletAddress && (
                   <WorldIDComponent
@@ -254,8 +253,7 @@ export const App = React.memo(function App() {
                   <button onClick={handleUpload}>Upload</button>
                 </Box>
               </div>
-              // )
-            }
+            )}
           </div>
         )}
 

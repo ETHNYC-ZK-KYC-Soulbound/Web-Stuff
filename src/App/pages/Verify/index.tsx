@@ -1,5 +1,12 @@
-import { Background } from "@/App/Background/Background";
-import { Box, Button, Container, Flex, Select, Spacer } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Select,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import React from "react";
 
@@ -27,6 +34,7 @@ const idToInfo = new Map<string, Info>([
 
 export default function Validate() {
   const [id, setId] = React.useState("");
+  console.log("id is", id);
   const handleSubmit = () => {
     console.log("Verifying user with id " + id);
   };
@@ -36,14 +44,16 @@ export default function Validate() {
       h="100vh"
       w="100vw"
     >
+      {/* <Background /> */}
       <Box
+        display="flex"
+        justifyContent="flex-end"
         alignItems="end"
         zIndex="1"
         p="20px"
       >
         <ConnectButton />
       </Box>
-      <Background />
       <Flex
         direction="column"
         justifyContent="center"
@@ -69,7 +79,15 @@ export default function Validate() {
             ))}
           </Select>
 
-          <div>{JSON.stringify(idToInfo.get(id))}</div>
+          <Text color="black">
+            {JSON.stringify(idToInfo.get(id)) ===
+            `{"state":"NYS","worldCoinVerified":false}`
+              ? "NYS : 🛑"
+              : JSON.stringify(idToInfo.get(id)) ===
+                `{"state":"WY","worldCoinVerified":true}`
+              ? "WY  : ✅"
+              : null}
+          </Text>
 
           <Spacer h="15px" />
           <Button
