@@ -21,7 +21,7 @@ npm install
 2. Run app (will open browser automatically).
 
 ```bash
-npm run dev
+npm run deva
 ```
 
 3. Go to [Usage instructions](#-usage-instructions).
