@@ -18,34 +18,36 @@ enum Screen {
 }
 
 export default function App() {
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const [walletAddress, setWalletAddress] = React.useState("");
+  const [walletAddress, setWalletAddress] = React.useState<string | undefined>();
   const [screen, setScreen] = React.useState(Screen.Initial)
 
   useEffect(() => {
+    console.log(walletAddress)
     if (!walletAddress) return
-    dispatch(updateWalletAddress(walletAddress))
+    // dispatch(updateWalletAddress(walletAddress))
     setScreen(Screen.WalletConnected)
   }, [walletAddress])
 
   function handleWorldIDComplete(worldIDResponse: VerificationResponse) {
     if (!worldIDResponse || !worldIDResponse.proof || !worldIDResponse.nullifier_hash || !worldIDResponse.merkle_root) {
-      dispatch(updateWorldIDResponse(undefined))
+      // dispatch(updateWorldIDResponse(undefined))
       toast.error('Failed to verify with WorldID!', {
         position: 'top-center',
-        autoClose: 5000,
+        autoClose: 4000,
         hideProgressBar: false,
         closeOnClick: true,
         draggable: true,
       })
       return
     }
-    dispatch(updateWorldIDResponse(worldIDResponse))
+    // updateWorldIDResponse(worldIDResponse)
+    // dispatch(updateWorldIDResponse(worldIDResponse))
     toast.success('Successfully verify with WorldID! <br /> Redirecting in five seconds....', {
       position: 'top-center',
-      autoClose: 5000,
+      autoClose: 4000,
       hideProgressBar: false,
       closeOnClick: true,
       draggable: true,
@@ -93,7 +95,7 @@ export default function App() {
           )}
 
           <Box textColor="black" className="mt-6 grid justify-items-center gap-y-3">
-            <RainbowConnectButton />
+            <RainbowConnectButton setWalletAddress={setWalletAddress} />
           </Box>
         </div>
       </div>

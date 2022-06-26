@@ -3,9 +3,9 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
+// import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
-import { PersistGate } from 'redux-persist/integration/react'
+// import { PersistGate } from 'redux-persist/integration/react'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
@@ -15,7 +15,7 @@ import App from "./pages/App";
 import Prove from "./pages/Prove";
 import Upload from './pages/Upload';
 import Verify from "./pages/Verify";
-import { persistor, store } from './states'
+// import { persistor, store } from './states'
 
 import "@rainbow-me/rainbowkit/styles.css";
 import "./styles/index.css";
@@ -48,8 +48,8 @@ const container = document.getElementById('root')
 const root = createRoot(container!)
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+    {/*<Provider store={store}>*/}
+      {/*<PersistGate loading={null} persistor={persistor}>*/}
         <ChakraProvider>
           <WagmiConfig client={wagmiClient}>
             <RainbowKitProvider chains={chains}>
@@ -93,7 +93,7 @@ root.render(
             </RainbowKitProvider>
           </WagmiConfig>
         </ChakraProvider>
-      </PersistGate>
-    </Provider>
+      {/*</PersistGate>*/}
+    {/*</Provider>*/}
   </React.StrictMode>,
 );

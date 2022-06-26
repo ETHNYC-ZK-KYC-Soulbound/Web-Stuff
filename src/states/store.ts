@@ -49,7 +49,6 @@ const persistingReducer = persistReducer(persistConfig, combineReducers(reducers
  *       "state" parameter is a "draft" of changes to be introduced to the original state. That draft "state"
  *       can be changed normally (like mutable object) but Immer.js produces new state (immutability!)
  */
-console.log(middleware)
 export const store = configureStore({
   reducer: persistingReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
@@ -59,11 +58,10 @@ export const store = configureStore({
       // ignoredPaths: ['web3'],
     },
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  }).concat(...middleware),
+  }), //.concat(...middleware),
   // middleware: enhancers,
   devTools: isDev,
 })
-
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}

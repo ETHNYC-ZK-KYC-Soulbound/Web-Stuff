@@ -16,7 +16,8 @@ const web3StorageToken = process.env.REACT_APP_WEB3_STORAGE_TOKEN!
 const storage = new Web3Storage({ token: web3StorageToken, endpoint: new URL("https://api.web3.storage") })
 
 export default function Upload() {
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
+  const [walletAddress, setWalletAddress] = useState<string | undefined()
 
   const [image, setImage] = useState<{ preview: string; raw: File | null }>({
     preview: "",
@@ -51,7 +52,7 @@ export default function Upload() {
     // });
     const cid = await storage.put([image.raw])
     // console.log(cid)
-    dispatch(updateUploadedCID(cid))
+    // dispatch(updateUploadedCID(cid))
 
     const provider = new JsonRpcProvider('https://rpc.ankr.com/polygon_mumbai')
     const contract = new Contract(WorldIDVerification.address, WorldIDVerification.abi, provider)
@@ -123,7 +124,7 @@ export default function Upload() {
           <button type="button" onClick={handleUpload} className="hover:bg-dddddd rounded-full bg-ffffff py-3 px-5 text-000000">Upload</button>
 
           <Box textColor="black" className="mt-6 grid justify-items-center gap-y-3">
-            <RainbowConnectButton />
+            <RainbowConnectButton setWalletAddress={setWalletAddress} />
           </Box>
         </div>
       </div>

@@ -1,11 +1,15 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import React from 'react'
+import React, {Dispatch, SetStateAction} from 'react'
 
-import {updateWalletAddress} from "@/states/application/slice";
-import {useAppDispatch} from "@/states/hooks";
+// import {updateWalletAddress} from "@/states/application/slice";
+// import {useAppDispatch} from "@/states/hooks";
 
-export default function RainbowConnectButton(): JSX.Element {
-  const dispatch = useAppDispatch()
+export default function RainbowConnectButton({
+  setWalletAddress
+}: {
+  setWalletAddress: Dispatch<SetStateAction < string | undefined >>
+}): JSX.Element {
+  // const dispatch = useAppDispatch()
 
   return (
     <div
@@ -52,7 +56,8 @@ export default function RainbowConnectButton(): JSX.Element {
                   );
                 }
 
-                dispatch(updateWalletAddress(account.address))
+                setWalletAddress(account.address)
+                // dispatch(updateWalletAddress(account.address))
 
                 return (
                   <div style={{ display: 'flex', gap: 12 }} className="hover:bg-bbbbbb rounded-full bg-ffffff py-3 px-5 transition">
