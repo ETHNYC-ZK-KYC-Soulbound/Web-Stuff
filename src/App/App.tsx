@@ -1,11 +1,13 @@
 import { Button } from "@/common/Button/Button";
 import { useToggle } from "@/common/hooks/use-toggle";
 import { CONTRACT_ABI, CONTRACT_ADDRESS, provider } from "@/const";
+import { getBase64 } from "@/photo";
 import { midEllipsis } from "@/utils";
 import { WorldIDComponent } from "@/WorldIDComponent";
 import { Box } from "@chakra-ui/react";
 import { defaultAbiCoder as abi } from "@ethersproject/abi";
 import type { VerificationResponse } from "@worldcoin/id";
+import axios from "axios";
 import cn from "classnames";
 import { ethers } from "ethers";
 import React, { useState } from "react";
@@ -21,19 +23,22 @@ enum Screen {
 }
 
 export const App = React.memo(function App() {
-  const [screen, setScreen] = React.useState(Screen.Initial);
+  const [screen, setScreen] = React.useState(Screen.Confirm);
   const [worldIDProof, setWorldIDProof] =
     React.useState<VerificationResponse | null>(null);
   const [walletAddress, setWalletAddress] = React.useState("");
   const [txHash, setTxHash] = React.useState(""); // hash of the executed airdrop
-  const [image, setImage] = useState({ preview: "", raw: "" });
+  const [image, setImage] = useState<{ preview: string; raw: File | null }>({
+    preview: "",
+    raw: null,
+  });
 
   const [modalContent, setModalContent] = React.useState<ModalContent>(
     modalVariants.confirmation,
   );
   const modal = useToggle();
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     if (e.target.files.length) {
       setImage({
         preview: URL.createObjectURL(e.target.files[0]),
@@ -42,18 +47,21 @@ export const App = React.memo(function App() {
     }
   };
 
-  const handleUpload = async (e) => {
+  const handleUpload = async (e: any) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", image.raw);
 
-    await fetch("YOUR_URL", {
-      method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      body: formData,
+    if (!image) {
+      throw new Error("Ahhh");
+    }
+
+    const base64String = await getBase64(image.raw!);
+
+    // TODO Set to real deployment
+    const result = await axios.post("http://localhost:3001/upload", {
+      photo: base64String,
     });
+
+    console.log(result.data);
   };
 
   const connectWallet = React.useCallback(async () => {
