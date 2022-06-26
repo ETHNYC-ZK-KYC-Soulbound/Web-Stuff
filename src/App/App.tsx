@@ -3,7 +3,7 @@ import { useToggle } from "@/common/hooks/use-toggle";
 import { CONTRACT_ABI, CONTRACT_ADDRESS, provider } from "@/const";
 import { midEllipsis } from "@/utils";
 import { WorldIDComponent } from "@/WorldIDComponent";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { defaultAbiCoder as abi } from "@ethersproject/abi";
 import type { VerificationResponse } from "@worldcoin/id";
 import cn from "classnames";
@@ -134,7 +134,13 @@ export const App = React.memo(function App() {
             className="text-20 font-bold text-ffffff xs:text-32"
             style={{ flexGrow: 1 }}
           >
-            zk kyc sbt
+            <Text
+              fontSize="5xl"
+              color="white"
+              fontWeight="light"
+            >
+              ZKPKYCSBT
+            </Text>
           </p>
           {walletAddress && (
             <div className="font-bold text-ffffff">
@@ -170,7 +176,10 @@ export const App = React.memo(function App() {
             </p>
 
             {screen === Screen.Initial && (
-              <div className="grid justify-items-center gap-y-3 ">
+              <Box
+                textColor="black"
+                className="grid justify-items-center gap-y-3 "
+              >
                 <Button
                   onClick={connectWallet}
                   type="button"
@@ -178,10 +187,11 @@ export const App = React.memo(function App() {
                 >
                   Connect Wallet
                 </Button>
-              </div>
+              </Box>
             )}
 
-            {screen === Screen.Confirm && (
+            {
+              // screen === Screen.Confirm && (
               <div className="grid w-full max-w-[254px] gap-y-8">
                 {walletAddress && (
                   <WorldIDComponent
@@ -196,6 +206,7 @@ export const App = React.memo(function App() {
                   justifyContent="center"
                   borderRadius="30"
                   h="55"
+                  textColor="black"
                   className="w-full bg-f1b261 hover:bg-f1b261/70"
                 >
                   <label htmlFor="upload-button">
@@ -229,12 +240,14 @@ export const App = React.memo(function App() {
                   justifyContent="center"
                   borderRadius="30"
                   h="55"
+                  textColor="black"
                   className="w-full bg-f1b261 hover:bg-f1b261/70"
                 >
                   <button onClick={handleUpload}>Upload</button>
                 </Box>
               </div>
-            )}
+              // )
+            }
           </div>
         )}
 
