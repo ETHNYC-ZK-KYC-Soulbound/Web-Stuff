@@ -4,13 +4,14 @@ import { CONTRACT_ABI, CONTRACT_ADDRESS, provider } from "@/const";
 import { getBase64 } from "@/photo";
 import { midEllipsis } from "@/utils";
 import { WorldIDComponent } from "@/WorldIDComponent";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Spacer, Text } from "@chakra-ui/react";
 import { defaultAbiCoder as abi } from "@ethersproject/abi";
 import type { VerificationResponse } from "@worldcoin/id";
 import axios from "axios";
 import cn from "classnames";
 import { ethers } from "ethers";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Background } from "./Background/Background";
 import { Modal } from "./Modal/Modal";
 import type { ModalContent } from "./Modal/modal-variants";
@@ -32,6 +33,12 @@ export const App = React.memo(function App() {
     preview: "",
     raw: null,
   });
+
+  // const proverPage = () => {
+  //   return {
+  //     link='router.push("/prover");'
+  //   }
+  // });
 
   const [modalContent, setModalContent] = React.useState<ModalContent>(
     modalVariants.confirmation,
@@ -142,13 +149,46 @@ export const App = React.memo(function App() {
             className="text-20 font-bold text-ffffff xs:text-32"
             style={{ flexGrow: 1 }}
           >
-            <Text
-              fontSize="5xl"
-              color="white"
-              fontWeight="light"
+            <Box
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="end"
+              zIndex="1"
+              p="20px"
             >
-              ZKPKYCSBT
-            </Text>
+              <Text
+                fontSize="5xl"
+                color="white"
+                fontWeight="light"
+              >
+                ZKPKYCSBT
+              </Text>
+              <Spacer />
+              <Box>
+                <Link to="/prove">
+                  <Text
+                    fontSize="xl"
+                    color="white"
+                    fontWeight="normal"
+                    p="20px"
+                  >
+                    Prove
+                  </Text>
+                </Link>
+              </Box>
+              <Box>
+                <Link to="/verify">
+                  <Text
+                    fontSize="xl"
+                    color="white"
+                    fontWeight="normal"
+                    p="20px"
+                  >
+                    Verify
+                  </Text>
+                </Link>
+              </Box>
+            </Box>
           </p>
           {walletAddress && (
             <div className="font-bold text-ffffff">
