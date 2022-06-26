@@ -19,12 +19,14 @@ export const grabFromIPFS = async (cid: string, pk: string) => {
   const files = await result!.files();
   const text = await files![0].text();
 
-  console.log(text);
+  // console.log(text);
 
+  // const toDecode = cipher.parse(text as string);
+
+  // console.log("Done");
+  // return await decryptWithPrivateKey(pk, toDecode);
   const toDecode = cipher.parse(text as string);
-
-  console.log("Done");
-  return await decryptWithPrivateKey(pk, toDecode);
+  return await decryptWithPrivateKey("privateKey", toDecode);
 };
 
 export function getBase64(file: File): Promise<string> {
