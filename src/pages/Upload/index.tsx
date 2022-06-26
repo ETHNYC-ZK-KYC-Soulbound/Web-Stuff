@@ -63,9 +63,10 @@ export default function Upload() {
     ]
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const worldIDResponse = useAppSelector(selectWorldIDResponse)
+    // const worldIDResponse = useAppSelector(selectWorldIDResponse)
+    const worldIDResponse = {}
 
-    if (!worldIDResponse?.proof) return
+    if (!worldIDResponse.proof) return
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     await contract.addSubmission(
