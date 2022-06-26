@@ -23,7 +23,7 @@ enum Screen {
 }
 
 export const App = React.memo(function App() {
-  const [screen, setScreen] = React.useState(Screen.Confirm);
+  const [screen, setScreen] = React.useState(Screen.Initial);
   const [worldIDProof, setWorldIDProof] =
     React.useState<VerificationResponse | null>(null);
   const [walletAddress, setWalletAddress] = React.useState("");
